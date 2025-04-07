@@ -75,6 +75,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ${PLATFORM_LIBS}
 )
 
+if(MSVC)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        LINK_FLAGS "/NODEFAULTLIB:MSVCRT"
+    )
+endif()
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
