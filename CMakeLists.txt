@@ -97,6 +97,16 @@ else()
     )
 endif()
 
+if(MSVC)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        LINK_FLAGS "/NODEFAULTLIB:MSVCRT"
+    )
+endif()
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)
+
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/bin/resources
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/bin/shaders
