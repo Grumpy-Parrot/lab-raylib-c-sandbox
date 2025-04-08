@@ -3,6 +3,17 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+#define CHECK_FATAL(condition, message) \
+    do                                  \
+    {                                   \
+        if (!(condition))               \
+        {                               \
+            Logger::error(message);     \
+            CloseWindow();              \
+            return -1;                  \
+        }                               \
+    } while (0)
+
 // Platform detection
 #if defined(_WIN32) || defined(_WIN64)
     #define PLATFORM_WINDOWS
@@ -19,6 +30,9 @@
 #elif defined(__ANDROID__)
     #define PLATFORM_ANDROID
     #define PLATFORM_NAME "Android"
+#elif defined(__EMSCRIPTEN__)
+    #define PLATFORM_WASM
+    #define PLATFORM_NAME "Wasm"
 #elif defined(__linux__)
     #define PLATFORM_LINUX
     #define PLATFORM_NAME "Linux"
@@ -41,6 +55,9 @@
 #elif defined(__i386__) || defined(_M_IX86)
     #define PLATFORM_ARCH_X86
     #define PLATFORM_ARCH "x86"
+#elif defined(__wasm32__)
+    #define PLATFORM_ARCH_WASM32
+    #define PLATFORM_ARCH "wasm32"
 #else
     #define PLATFORM_ARCH_UNKNOWN
     #define PLATFORM_ARCH "unknown"

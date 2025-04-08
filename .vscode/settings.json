@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "raylib.h": "c",
+        "RayLibAPI.h": "c",
+        "rlgl.h": "c",
+        "Platform.h": "c",
+        "string": "cpp"
+    }
+}
